@@ -55,7 +55,7 @@ describe("FileRecordRepository", () => {
     expect(records[0].outputs.INV1).toBe(100);
   });
 
-  it("uses atomic write (temp then rename)", async () => {
+  it("persists data visible to another repo instance", async () => {
     const t = new Date("2019-07-09T00:00:00Z");
     await repo.create(makeRecord("id-1", t, makeOutputs()));
     const { records } = await repo.findAll({});

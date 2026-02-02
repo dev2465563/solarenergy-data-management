@@ -17,11 +17,8 @@ describe("formatDate", () => {
 });
 
 describe("formatEnergy", () => {
-  it("returns em dash for null", () => {
+  it("returns em dash for null or undefined", () => {
     expect(formatEnergy(null)).toBe("—");
-  });
-
-  it("returns em dash for undefined", () => {
     expect(formatEnergy(undefined)).toBe("—");
   });
 

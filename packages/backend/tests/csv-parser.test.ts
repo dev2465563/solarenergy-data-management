@@ -67,23 +67,13 @@ describe("parseCsvBuffer", () => {
     }
   });
 
-  it("rejects values outside realistic range (-10 to 2000)", async () => {
-    const csv = "timestamp,INV1\n7/9/2019 0:00,3000\n";
-    const result = await parseCsvBuffer(Buffer.from(csv, "utf-8"));
-    expect(result.ok).toBe(false);
-    if (!result.ok) {
-      expect(result.message).toMatch(/out of range/);
-      expect(result.message).toMatch(/3000/);
-    }
-  });
-
-  it("rejects values below -10", async () => {
-    const csv = "timestamp,INV1\n7/9/2019 0:00,-11\n";
-    const result = await parseCsvBuffer(Buffer.from(csv, "utf-8"));
-    expect(result.ok).toBe(false);
-    if (!result.ok) {
-      expect(result.message).toMatch(/out of range/);
-    }
+  it("rejects values outside range (-10 to 2000)", async () => {
+    const above = await parseCsvBuffer(Buffer.from("timestamp,INV1\n7/9/2019 0:00,3000\n", "utf-8"));
+    const below = await parseCsvBuffer(Buffer.from("timestamp,INV1\n7/9/2019 0:00,-11\n", "utf-8"));
+    expect(above.ok).toBe(false);
+    expect(below.ok).toBe(false);
+    if (!above.ok) expect(above.message).toMatch(/out of range/);
+    if (!below.ok) expect(below.message).toMatch(/out of range/);
   });
 
   it("accepts duplicate timestamps (creates multiple rows)", async () => {

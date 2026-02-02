@@ -8,24 +8,9 @@ describe("updateRecordBodySchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("rejects NaN in outputs", () => {
-    const result = updateRecordBodySchema.safeParse({
-      outputs: { INV1: NaN },
-    });
-    expect(result.success).toBe(false);
-  });
-
-  it("rejects Infinity in outputs", () => {
-    const result = updateRecordBodySchema.safeParse({
-      outputs: { INV1: Infinity },
-    });
-    expect(result.success).toBe(false);
-  });
-
-  it("rejects -Infinity in outputs", () => {
-    const result = updateRecordBodySchema.safeParse({
-      outputs: { INV1: -Infinity },
-    });
-    expect(result.success).toBe(false);
+  it("rejects non-finite numbers (NaN, Infinity, -Infinity)", () => {
+    expect(updateRecordBodySchema.safeParse({ outputs: { INV1: NaN } }).success).toBe(false);
+    expect(updateRecordBodySchema.safeParse({ outputs: { INV1: Infinity } }).success).toBe(false);
+    expect(updateRecordBodySchema.safeParse({ outputs: { INV1: -Infinity } }).success).toBe(false);
   });
 });
