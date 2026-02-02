@@ -1,0 +1,2 @@
+export const DEFAULT_PAGE_SIZE = 25;
+export const DEVICE_SELECTOR_THRESHOLD = 25;

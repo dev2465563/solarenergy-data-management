@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      STATIC_DIR: /app/packages/frontend/dist
+      DATA_DIR: /data
+    volumes:
+      - solar-data:/data
+
+volumes:
+  solar-data:

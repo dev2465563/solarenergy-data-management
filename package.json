@@ -1,0 +1,19 @@
+{
+  "name": "solar-energy-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Solar energy data management – full-stack challenge",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm run dev:backend & pnpm run dev:frontend",
+    "dev:backend": "pnpm --filter backend run dev",
+    "dev:frontend": "pnpm --filter frontend run dev",
+    "test": "pnpm -r run test",
+    "test:backend": "pnpm --filter backend run test",
+    "test:frontend": "pnpm --filter frontend run test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.14.2"
+}
